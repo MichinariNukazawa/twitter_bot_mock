@@ -4,9 +4,12 @@ twitter bot daemonのモック。
 
 
 # About
-- mentionが来るとretweetとreplyを行う。(mention:自アカウントに対する`@ユーザ名`が含まれるツイート)  
+- mentionが来るとretweetまたはquote tweetと、replyを行う。  
 - replyとretweetに対してfavoを行う。  
 - Bot起動時、自動で日時付きメッセージをツイートする。  
+
+(mention:自アカウントに対する`@ユーザ名`が含まれるツイート)  
+(quote tweet:`引用ツイート`)  
 
 ![twitter bot](document/image/20180420.png)  
 

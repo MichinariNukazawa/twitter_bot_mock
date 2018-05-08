@@ -8,6 +8,8 @@ import datetime
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
+def get_tweet_url_from_status(status):
+	return "https://twitter.com/{0}/status/{1}".format(status.user.screen_name, status.id)
 
 class Listener(tweepy.StreamListener):
 	def on_status(self, status):
@@ -47,11 +49,19 @@ class Listener(tweepy.StreamListener):
 				#print("receive mention: " + str(datetime.datetime.today()))
 
 				# ** retweet
+				#try:
+				#	api.retweet(status.id)
+				#except TweepError as err:
+				#	pp.pprint(err)
+					#return False
+
+				# ** quote tweet(ja:`引用ツイート`)
 				try:
-					api.retweet(status.id)
+					tweet_url = get_tweet_url_from_status(status)
+					tweet = "Quite tweet test!\n{0}".format(tweet_url)
+					api.update_status(status=tweet, in_reply_to_status_id=status.id)
 				except TweepError as err:
 					pp.pprint(err)
-					#return False
 
 				# ** reply
 				try:
