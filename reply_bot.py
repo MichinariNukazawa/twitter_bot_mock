@@ -26,7 +26,16 @@ class Listener(tweepy.StreamListener):
 					pp.pprint(err)
 				return True
 
-		# ** retweet and reply when mention ("@" tweet)
+		# ** favo when retweet
+		if hasattr(status, "retweeted_status"):
+			print("receive retweet: " + str(datetime.datetime.today()))
+			try:
+				api.create_favorite(status.id)
+			except TweepError as err:
+				pp.pprint(err)
+			return True
+
+		# ** reply when mention ("@" tweet)
 		for user_mention in status.entities['user_mentions']:
 			#print("receive mention: {0} {1}".format(status.user.screen_name, str(datetime.datetime.today())))
 			#pp.pprint(user_mention)
